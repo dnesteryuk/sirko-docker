@@ -1,0 +1,20 @@
+version: '2'
+services:
+  neo4j:
+    image: neo4j:3.0.6
+    environment:
+      - NEO4J_AUTH=none
+    ports:
+      - "7474:7474"
+
+  sirko:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    environment:
+      - NEO4J_URL=http://neo4j:7474
+    ports:
+      - "4000:4000"
+    links:
+      - neo4j
