@@ -1,64 +1,31 @@
 # Sirko docker
 
-This repository contains a Dockerfile which takes care of building a docker image in order to launch
-the [Sirko engine](https://github.com/dnesteryuk/sirko-engine) through [Docker]. Besides that,
-it provides an easy way to launch the built image and all dependencies for the engine.
+This repository keeps:
 
-## Requirements
+- a Dockerfile for building a docker image for the [Sirko Engine](https://github.com/dnesteryuk/sirko-engine)
+- an example of a docker-compose.yml file to launch the Sirko Engine along with Neo4j.
 
- - at least 2 Gb of free RAM
- - installed [Docker]
- - installed [Docker compose](https://docs.docker.com/compose/install)
+The documentation describing how to use the docker image can be found [here](https://github.com/sirko-io/engine#install-with-docker).
 
-[Docker]: https://www.docker.com/products/overview
+## Building a new image
 
-## Usage
-
-1. Clone the repo.
+1. Download the latest version of the [Sirko Engine](https://github.com/sirko-io/engine/releases):
 
     ```
-    $ git clone https://github.com/dnesteryuk/sirko-docker.git ./
+    $ wget https://github.com/sirko-io/engine/releases/download/v0.0.1/sirko.tar.gz
     ```
 
-2. Create a `.env` file.
+2. Build an image:
+
+    **IMPORTANT:** Don't forget to update the version in the example below.
 
     ```
-    # The url to your site
-    SIRKO_CLIENT_URL=http://localhost:3000
-
-    # In order to see errors happening to the engine,
-    # the engine got integrated with https://rollbar.com which has
-    # a free plan to start with. If you want to disable this service,
-    # remove the following environment variable
-    ROLLBAR_ACCESS_TOKEN=access-token
+    $ sudo docker build -t dnesteryuk/sirko:0.0.1 -t dnesteryuk/sirko:latest .
     ```
 
-3. Launch the engine and its dependencies.
+3. Push the built image to the [Docker hub](https://hub.docker.com/):
 
     ```
-    $ sudo docker-compose up -d
+    $ sudo docker push dnesteryuk/sirko:0.0.1
+    $ sudo docker push dnesteryuk/sirko:latest
     ```
-
-4. Verify what happens to the engine.
-
-    ```
-    $ sudo docker-compose logs sirko
-    ```
-
-  If you see a message like this:
-
-      Expecting requests from http://localhost:3000
-
-  the engine is running and it is ready to accept requests.
-
-## Updating the engine
-
-Currently, the image grabs the code from [the master branch](https://github.com/dnesteryuk/sirko-engine/tree/master).
-To pick new changes introduced to the engine, execute:
-
-```
-$ sudo docker-compose build --no-cache
-$ sudo docker-compose up -d
-```
-
-The same steps you have to make after changing the `.env` file. Unfortunately, it is only the way to pick new settings.

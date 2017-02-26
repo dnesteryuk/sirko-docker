@@ -1,16 +1,19 @@
-FROM elixir:1.3.4
+FROM debian:jessie-slim
 MAINTAINER Dmitriy Nesteryuk "dmitriy.nesteryuk@gmail.com"
 
-ENV DEBIAN_FRONTEND=noninteractive
-ENV MIX_ENV=prod
+ENV LANG=C.UTF-8
 
-# Install hex
-RUN mix local.hex --force
+RUN apt-get update && apt-get install -y libssl-dev
 
-WORKDIR /app
+RUN mkdir /usr/local/sirko/
 
-RUN git clone https://github.com/dnesteryuk/sirko-engine.git ./
-RUN mix deps.get
-RUN mix compile
+ADD sirko.tar.gz /usr/local/sirko/
 
-CMD ["mix", "run", "--no-halt"]
+# Clean up APT
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+EXPOSE 4000
+
+WORKDIR /usr/local/sirko/
+
+CMD ["bin/sirko", "foreground"]
