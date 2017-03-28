@@ -2,6 +2,7 @@ version: '2'
 services:
   neo4j:
     image: neo4j:3.1.1
+    restart: always
     environment:
       - NEO4J_AUTH=none
     ports:
@@ -9,8 +10,9 @@ services:
 
   sirko:
     image: dnesteryuk/sirko:latest
+    restart: always
     volumes:
-      - sirko.conf:/usr/local/sirko/sirko.conf
+      - ./sirko.conf:/usr/local/sirko/sirko.conf
     ports:
       - "4000:4000"
     links:
