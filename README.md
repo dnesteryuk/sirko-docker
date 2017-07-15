@@ -2,7 +2,7 @@
 
 This repository keeps:
 
-- a Dockerfile for building a docker image for the [Sirko Engine](https://github.com/dnesteryuk/sirko-engine)
+- a Dockerfile for building a docker image for the [Sirko Engine](https://github.com/sirko-io/engine)
 - an example of a docker-compose.yml file to launch the Sirko Engine along with Neo4j.
 
 The documentation describing how to use the docker image can be found [here](https://github.com/sirko-io/engine#install-with-docker).
