@@ -12,7 +12,7 @@ The documentation describing how to use the docker image can be found [here](htt
 1. Download the latest version of the [Sirko Engine](https://github.com/sirko-io/engine/releases):
 
     ```
-    $ wget https://github.com/sirko-io/engine/releases/download/v0.0.1/sirko.tar.gz
+    $ wget https://github.com/sirko-io/engine/releases/download/v0.5.0/sirko.tar.gz
     ```
 
 2. Build an image:
@@ -20,12 +20,12 @@ The documentation describing how to use the docker image can be found [here](htt
     **IMPORTANT:** Don't forget to update the version in the example below.
 
     ```
-    $ sudo docker build -t dnesteryuk/sirko:0.0.1 -t dnesteryuk/sirko:latest .
+    $ sudo docker build -t dnesteryuk/sirko:0.5.0 -t dnesteryuk/sirko:latest .
     ```
 
 3. Push the built image to the [Docker hub](https://hub.docker.com/):
 
     ```
-    $ sudo docker push dnesteryuk/sirko:0.0.1
+    $ sudo docker push dnesteryuk/sirko:0.5.0
     $ sudo docker push dnesteryuk/sirko:latest
     ```

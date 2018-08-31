@@ -1,9 +1,12 @@
-FROM debian:jessie-slim
+FROM debian:stretch-slim
 MAINTAINER Dmitriy Nesteryuk "dmitriy.nesteryuk@gmail.com"
 
 ENV LANG=C.UTF-8
 
-RUN apt-get update && apt-get install -y libssl-dev
+RUN apt-get update && \
+    apt-get install -y libssl-dev && \
+    apt-get upgrade && \
+    apt-get autoremove
 
 RUN mkdir /usr/local/sirko/
 
@@ -16,4 +19,5 @@ EXPOSE 4000
 
 WORKDIR /usr/local/sirko/
 
-CMD ["bin/sirko", "foreground"]
+ENTRYPOINT ["bin/sirko"]
+CMD ["foreground"]
